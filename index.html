@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -15,375 +14,326 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:#0B1520;color:#C8DCF0;font-family:'DM Sans',sans-serif;font-weight:400;overflow-x:hidden}
+body{background:linear-gradient(180deg,#0a1628 0%,#112240 30%,#0d1a2e 60%,#0B1520 100%);background-attachment:fixed;color:#C8DCF0;font-family:'DM Sans',sans-serif;overflow-x:hidden}
 
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px 40px;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:linear-gradient(180deg,#0a1628 0%,#112240 40%,#0B1520 100%);z-index:0}
-.hero-glow{position:absolute;top:20%;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(45,200,138,0.06) 0%,transparent 70%);z-index:0}
-.hero-content{position:relative;z-index:1;max-width:600px}
-.hero-badge{display:inline-block;background:rgba(45,200,138,0.1);border:1px solid rgba(45,200,138,0.25);border-radius:50px;padding:6px 18px;font-size:12px;color:#2DC88A;font-weight:500;letter-spacing:0.05em;margin-bottom:24px;animation:fadeUp 0.8s ease}
-.hero h1{font-family:‘DM Serif Display’,serif;font-size:clamp(36px,8vw,56px);color:#FFFFFF;line-height:1.15;margin-bottom:16px;animation:fadeUp 0.8s ease 0.1s both}
+/* Stars */
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0}
+.star{position:absolute;background:#fff;border-radius:50%;animation:tw 3s ease-in-out infinite alternate}
+@keyframes tw{0%{opacity:.06}100%{opacity:.45}}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:16px 28px;display:flex;justify-content:space-between;align-items:center;background:rgba(11,21,32,0.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.04)}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;letter-spacing:0.02em}
+.nav-logo em{color:#2DC88A;font-style:normal}
+.nav-cta{background:#2DC88A;color:#080f18;border:none;border-radius:50px;padding:8px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s}
+.nav-cta:hover{background:#3dd89a}
+
+/* Util */
+.wrap{max-width:720px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.tag{font-size:11px;color:#2DC88A;text-transform:uppercase;letter-spacing:.15em;font-weight:600;margin-bottom:10px}
+.title{font-family:'DM Serif Display',serif;font-size:clamp(24px,5vw,36px);color:#fff;line-height:1.2;margin-bottom:14px}
+.sub{font-size:15px;color:#6A8BA8;line-height:1.8;margin-bottom:24px}
+.sep{height:1px;background:rgba(255,255,255,0.04);max-width:720px;margin:0 auto}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,22,40,0.5),rgba(17,34,64,0.3) 40%,transparent);z-index:0}
+.hero-glow{position:absolute;top:18%;left:50%;transform:translateX(-50%);width:700px;height:450px;background:radial-gradient(ellipse,rgba(45,200,138,0.07),transparent 70%);z-index:0}
+.hero-inner{position:relative;z-index:1;max-width:620px}
+.hero-pill{display:inline-block;background:rgba(45,200,138,0.1);border:1px solid rgba(45,200,138,0.25);border-radius:50px;padding:6px 18px;font-size:12px;color:#2DC88A;font-weight:500;letter-spacing:.05em;margin-bottom:28px;animation:up .8s ease}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(28px,6.5vw,50px);color:#fff;line-height:1.18;margin-bottom:18px;animation:up .8s ease .1s both}
 .hero h1 em{color:#2DC88A;font-style:italic}
-.hero-sub{font-size:clamp(15px,3.5vw,18px);color:#6A8BA8;line-height:1.7;max-width:480px;margin:0 auto 32px;animation:fadeUp 0.8s ease 0.2s both}
-.hero-buttons{display:flex;flex-direction:column;gap:12px;align-items:center;animation:fadeUp 0.8s ease 0.3s both}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;background:#2DC88A;color:#080f18;border:none;border-radius:50px;padding:14px 32px;font-family:‘DM Sans’,sans-serif;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;transition:all 0.2s}
-.btn-primary:hover{background:#3dd89a;transform:translateY(-1px)}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#6AAFE0;border:1px solid rgba(106,175,224,0.3);border-radius:50px;padding:12px 28px;font-family:‘DM Sans’,sans-serif;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:all 0.2s}
-.btn-secondary:hover{border-color:rgba(106,175,224,0.6);background:rgba(106,175,224,0.05)}
-.scroll-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:#3A5570;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;animation:bob 2s ease infinite}
+.hero-text{font-size:clamp(15px,3.5vw,17px);color:#6A8BA8;line-height:1.7;max-width:500px;margin:0 auto 10px;animation:up .8s ease .2s both}
+.hero-text strong{color:#C8DCF0}
+.hero-sm{font-size:14px;color:#3A5570;max-width:460px;margin:0 auto 36px;line-height:1.6;animation:up .8s ease .25s both}
+.hero-btns{display:flex;flex-direction:column;gap:12px;align-items:center;animation:up .8s ease .3s both}
+.btn-g{display:inline-flex;align-items:center;gap:8px;background:#2DC88A;color:#080f18;border-radius:50px;padding:14px 34px;font-size:15px;font-weight:600;text-decoration:none;transition:all .2s;font-family:'DM Sans',sans-serif}
+.btn-g:hover{background:#3dd89a;transform:translateY(-1px)}
+.btn-o{display:inline-flex;align-items:center;gap:6px;color:#6AAFE0;border:1px solid rgba(106,175,224,.3);border-radius:50px;padding:11px 26px;font-size:14px;font-weight:500;text-decoration:none;transition:all .2s;font-family:'DM Sans',sans-serif}
+.btn-o:hover{border-color:rgba(106,175,224,.6);background:rgba(106,175,224,.05)}
+.scroll-arr{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:#3A5570;font-size:11px;letter-spacing:.1em;text-transform:uppercase;animation:bob 2s ease infinite}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-/* SECTIONS */
-section{padding:80px 24px;max-width:720px;margin:0 auto}
-.section-label{font-size:11px;color:#2DC88A;text-transform:uppercase;letter-spacing:0.15em;font-weight:600;margin-bottom:12px}
-.section-title{font-family:‘DM Serif Display’,serif;font-size:clamp(24px,5vw,36px);color:#FFFFFF;margin-bottom:16px;line-height:1.2}
-.section-text{font-size:15px;color:#6A8BA8;line-height:1.8;margin-bottom:24px}
+/* Endorsement */
+.endo{max-width:720px;margin:-30px auto 0;padding:0 24px;position:relative;z-index:2}
+.endo-card{text-align:center;padding:26px 20px;background:rgba(45,200,138,.06);border:1px solid rgba(45,200,138,.18);border-radius:18px}
+.endo-q{font-family:'DM Serif Display',serif;font-size:21px;color:#fff;font-style:italic;margin-bottom:8px}
+.endo-who{font-size:14px;color:#2DC88A;font-weight:600}
+.endo-sub{font-size:11px;color:#3A5570;margin-top:3px}
 
-/* PROBLEM SECTION */
-.problem{border-top:1px solid rgba(255,255,255,0.04)}
-.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
-.problem-card{background:#142231;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px}
-.problem-card .pc-icon{font-size:28px;margin-bottom:10px}
-.problem-card .pc-title{font-size:14px;color:#FFFFFF;font-weight:600;margin-bottom:6px}
-.problem-card .pc-text{font-size:12px;color:#6A8BA8;line-height:1.6}
-@media(max-width:480px){.problem-grid{grid-template-columns:1fr}}
+/* Sections */
+.sec{padding:70px 24px;max-width:720px;margin:0 auto}
 
-/* FEATURES */
-.features{border-top:1px solid rgba(255,255,255,0.04)}
-.feature-row{display:flex;gap:16px;align-items:flex-start;margin-bottom:24px;padding:20px;background:#142231;border:1px solid rgba(255,255,255,0.06);border-radius:16px}
-.feature-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.feature-info{flex:1}
-.feature-name{font-size:15px;color:#FFFFFF;font-weight:600;margin-bottom:4px}
-.feature-desc{font-size:13px;color:#6A8BA8;line-height:1.6}
+/* Problem grid */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+@media(max-width:500px){.pgrid{grid-template-columns:1fr}}
+.pcard{background:#142231;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:20px}
+.pcard-i{font-size:26px;margin-bottom:8px}
+.pcard-t{font-size:14px;color:#fff;font-weight:600;margin-bottom:5px}
+.pcard-d{font-size:12px;color:#6A8BA8;line-height:1.6}
 
-/* SOCIAL PROOF */
-.proof{border-top:1px solid rgba(255,255,255,0.04);text-align:center}
-.quote-card{background:rgba(106,175,224,0.06);border:1px solid rgba(106,175,224,0.15);border-radius:20px;padding:32px 24px;margin:24px 0}
-.quote-text{font-family:‘DM Serif Display’,serif;font-style:italic;font-size:clamp(16px,4vw,20px);color:#C8DCF0;line-height:1.7;margin-bottom:12px}
-.quote-source{font-size:13px;color:#6A8BA8}
-.proof-stats{display:flex;justify-content:center;gap:32px;margin-top:24px;flex-wrap:wrap}
-.proof-stat{text-align:center}
-.proof-num{font-family:‘DM Serif Display’,serif;font-size:28px;color:#FFFFFF}
-.proof-label{font-size:11px;color:#3A5570;margin-top:2px}
+/* Features */
+.frow{display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;padding:20px;background:#142231;border:1px solid rgba(255,255,255,.06);border-radius:16px}
+.ficon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.fname{font-size:15px;color:#fff;font-weight:600;margin-bottom:3px}
+.fdesc{font-size:13px;color:#6A8BA8;line-height:1.6}
 
-/* COMPARISON */
-.comparison{border-top:1px solid rgba(255,255,255,0.04)}
-.comp-table{width:100%;border-collapse:collapse;margin-top:24px}
-.comp-table th{font-size:12px;color:#6A8BA8;text-transform:uppercase;letter-spacing:0.08em;padding:12px 8px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.08);font-weight:600}
-.comp-table th:first-child{text-align:left}
-.comp-table th.skye-col{color:#2DC88A}
-.comp-table td{font-size:13px;color:#C8DCF0;padding:14px 8px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.04)}
-.comp-table td:first-child{text-align:left;color:#6A8BA8}
-.comp-check{color:#2DC88A;font-size:16px}
-.comp-x{color:#3A5570;font-size:16px}
+/* Quotes */
+.qcard{background:rgba(106,175,224,.06);border:1px solid rgba(106,175,224,.15);border-radius:18px;padding:28px 22px;margin:16px 0}
+.qtxt{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(15px,3.5vw,19px);color:#C8DCF0;line-height:1.7;margin-bottom:10px}
+.qsrc{font-size:12px;color:#6A8BA8}
 
-/* WAITLIST */
-.waitlist{border-top:1px solid rgba(255,255,255,0.04);text-align:center}
-.waitlist-form{max-width:420px;margin:24px auto 0}
-.form-input{width:100%;background:#142231;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 16px;color:#C8DCF0;font-family:‘DM Sans’,sans-serif;font-size:14px;outline:none;margin-bottom:10px;transition:border-color 0.2s}
-.form-input:focus{border-color:rgba(45,200,138,0.4)}
-.form-input::placeholder{color:#3A5570}
-.form-textarea{min-height:100px;resize:vertical}
-.form-submit{width:100%;background:#2DC88A;border:none;border-radius:12px;padding:15px;color:#080f18;font-family:‘DM Sans’,sans-serif;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px;transition:all 0.2s}
-.form-submit:hover{background:#3dd89a}
-.form-submit:active{transform:scale(0.98)}
-.form-note{font-size:11px;color:#3A5570;margin-top:12px}
+/* Stats */
+.stats{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin:24px 0 8px}
+.sbox{text-align:center}
+.snum{font-family:'DM Serif Display',serif;font-size:30px;color:#fff}
+.slab{font-size:11px;color:#3A5570;margin-top:2px;text-transform:uppercase;letter-spacing:.06em}
+.ssrc{font-size:10px;color:#2a3548;text-align:center;margin-top:6px}
 
-/* FOUNDER */
-.founder{border-top:1px solid rgba(255,255,255,0.04);text-align:center}
-.founder-card{background:#142231;border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:32px 24px;margin-top:24px}
-.founder-text{font-family:‘DM Serif Display’,serif;font-style:italic;font-size:17px;color:#C8DCF0;line-height:1.8;margin-bottom:16px}
-.founder-name{font-size:13px;color:#2DC88A;font-weight:500}
-.founder-loc{font-size:12px;color:#3A5570;margin-top:2px}
+/* Table */
+.ctable{width:100%;border-collapse:collapse;margin-top:20px}
+.ctable th{font-size:11px;color:#6A8BA8;text-transform:uppercase;letter-spacing:.08em;padding:12px 8px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08);font-weight:600}
+.ctable th:first-child{text-align:left}
+.ctable th.sk{color:#2DC88A}
+.ctable td{font-size:13px;color:#C8DCF0;padding:13px 8px;text-align:center;border-bottom:1px solid rgba(255,255,255,.04)}
+.ctable td:first-child{text-align:left;color:#6A8BA8}
+.ck{color:#2DC88A;font-weight:700}
+.cx{color:#C0386A}
 
-/* SOCIALS */
-.socials{border-top:1px solid rgba(255,255,255,0.04);text-align:center;padding-bottom:40px}
-.social-grid{display:flex;flex-direction:column;gap:10px;max-width:360px;margin:24px auto 0}
-.social-link{display:flex;align-items:center;justify-content:space-between;background:#142231;border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:14px 18px;text-decoration:none;color:#C8DCF0;font-size:14px;transition:all 0.2s}
-.social-link:hover{border-color:rgba(255,255,255,0.15);background:#1a2d40}
-.social-link span{font-size:18px}
+/* Waitlist */
+.wlbox{text-align:center}
+.wltag{font-size:14px;color:#2DC88A;font-weight:500;margin-bottom:4px}
+.wlform{max-width:420px;margin:24px auto 0}
+.fi{width:100%;background:#142231;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px;color:#C8DCF0;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;margin-bottom:10px;transition:border-color .2s}
+.fi:focus{border-color:rgba(45,200,138,.4)}
+.fi::placeholder{color:#3A5570}
+.fta{min-height:90px;resize:vertical}
+.fbtn{width:100%;background:#2DC88A;border:none;border-radius:12px;padding:15px;color:#080f18;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px;transition:all .2s}
+.fbtn:hover{background:#3dd89a}
+.fnote{font-size:11px;color:#3A5570;margin-top:12px}
 
-/* FOOTER */
-.footer{text-align:center;padding:32px 24px;border-top:1px solid rgba(255,255,255,0.04);font-size:11px;color:#3A5570;line-height:1.8}
-.footer a{color:#6A8BA8;text-decoration:none}
+/* Founder */
+.fcard{background:#142231;border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:30px 24px;margin-top:20px;text-align:center}
+.fcard-text{font-family:'DM Serif Display',serif;font-style:italic;font-size:16px;color:#C8DCF0;line-height:1.8;margin-bottom:14px}
+.fcard-name{font-size:14px;color:#2DC88A;font-weight:600;margin-top:16px}
+.fcard-loc{font-size:12px;color:#3A5570;margin-top:2px}
 
-/* FLOATING CTA */
-.float-cta{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#2DC88A;color:#080f18;border:none;border-radius:50px;padding:12px 24px;font-family:‘DM Sans’,sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 8px 32px rgba(45,200,138,0.3);z-index:100;opacity:0;pointer-events:none;transition:all 0.3s;text-decoration:none}
-.float-cta.show{opacity:1;pointer-events:all}
+/* Social */
+.sgrid{display:flex;flex-direction:column;gap:10px;max-width:360px;margin:20px auto 0}
+.slink{display:flex;align-items:center;justify-content:space-between;background:#142231;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px 18px;text-decoration:none;color:#C8DCF0;font-size:14px;transition:all .2s}
+.slink:hover{border-color:rgba(255,255,255,.15);background:#1a2d40}
+.slink span{font-size:18px}
+.slink.cof{border-color:rgba(255,209,0,.2);color:#FFD100}
+.slink.cof:hover{background:rgba(255,209,0,.06);border-color:rgba(255,209,0,.35)}
+
+/* Footer */
+.foot{text-align:center;padding:32px 24px;border-top:1px solid rgba(255,255,255,.04);font-size:11px;color:#3A5570;line-height:1.8;max-width:720px;margin:0 auto}
+.foot a{color:#6A8BA8;text-decoration:none}
+
+/* Float CTA */
+.fcta{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#2DC88A;color:#080f18;border-radius:50px;padding:12px 24px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;box-shadow:0 8px 32px rgba(45,200,138,.3);z-index:100;opacity:0;pointer-events:none;transition:all .3s;text-decoration:none}
+.fcta.show{opacity:1;pointer-events:all}
+
+@media(max-width:500px){
+  .hero{padding:80px 20px 50px}
+  .stats{gap:20px}
+  .nav{padding:12px 20px}
+}
 </style>
-
 </head>
 <body>
 
-<!-- HERO -->
+<div class="stars" id="stars"></div>
 
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">S<em>k</em>ye</div>
+  <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+</nav>
+
+<!-- HERO -->
 <div class="hero">
   <div class="hero-bg"></div>
   <div class="hero-glow"></div>
-  <div class="hero-content">
-    <div class="hero-badge">Emotional Weather Technology</div>
-    <h1>Calm Through<br><em>Every Storm</em></h1>
-    <div class="hero-sub">The first app that translates live weather data into calm, plain-language reassurance. Built for the 85% of people who get anxious during storms.</div>
-    <div class="hero-buttons">
-      <a href="https://skye-ctes-app.github.io/skye-app-demo/" class="btn-primary">Try the Live Demo →</a>
-      <a href="#waitlist" class="btn-secondary">Join the Waitlist</a>
+  <div class="hero-inner">
+    <div class="hero-pill">Emotional Weather Technology</div>
+    <h1>Weather apps tell you a storm is coming. They don't tell you if <em>you're safe.</em></h1>
+    <p class="hero-text">Skye is the first app that translates live weather data into <strong>calm, plain-language reassurance</strong> — so you know whether you're safe right now.</p>
+    <p class="hero-sm">Built for the millions of people who check radar at 2am, not because they want data — because they want to know it's going to be okay.</p>
+    <div class="hero-btns">
+      <a href="#waitlist" class="btn-g">Join the Waitlist →</a>
+      <a href="https://skye-ctes-app.github.io/skye-app-demo/" class="btn-o">Try the Live Demo</a>
     </div>
   </div>
-  <div class="scroll-hint">↓ Scroll</div>
+  <div class="scroll-arr">↓ Scroll</div>
 </div>
 
-<!-- PROBLEM -->
+<!-- ENDORSEMENT -->
+<div class="endo">
+  <div class="endo-card">
+    <div class="endo-q">"Love the concept."</div>
+    <div class="endo-who">— James Spann, Chief Meteorologist</div>
+    <div class="endo-sub">Alabama Weather Network · Reviewed the live demo · Used with permission</div>
+  </div>
+</div>
 
-<section class="problem">
-  <div class="section-label">The Problem</div>
-  <div class="section-title">Weather apps tell you a storm is coming. They don't tell you if you're safe.</div>
-  <div class="section-text">40 million Americans have anxiety disorders. Millions more experience fear during severe weather. But every weather app on the market is built the same way: scary red alerts, complex radar, and zero emotional support. Nobody answers the question anxious people are actually asking.</div>
-  <div class="problem-grid">
-    <div class="problem-card">
-      <div class="pc-icon">🚨</div>
-      <div class="pc-title">SEVERE WARNING</div>
-      <div class="pc-text">Alarm-driven alerts that spike your cortisol instead of helping you understand the situation.</div>
-    </div>
-    <div class="problem-card">
-      <div class="pc-icon">📡</div>
-      <div class="pc-title">Raw Radar Data</div>
-      <div class="pc-text">Complex maps designed for meteorologists, not for someone panicking at 2am.</div>
-    </div>
-    <div class="problem-card">
-      <div class="pc-icon">😰</div>
-      <div class="pc-title">No Reassurance</div>
-      <div class="pc-text">No app tells you "your home can handle this" or "this passes in 35 minutes."</div>
-    </div>
-    <div class="problem-card">
-      <div class="pc-icon">🧘</div>
-      <div class="pc-title">No Storm Tools</div>
-      <div class="pc-text">Wellness apps have breathing exercises but zero connection to live weather data.</div>
-    </div>
+<div class="sep" style="margin-top:50px"></div>
+
+<!-- PROBLEM -->
+<section class="sec">
+  <div class="tag">The Problem</div>
+  <div class="title">Every weather app is built to alarm you.</div>
+  <p class="sub">40 million Americans have anxiety disorders. Millions more experience fear during severe weather. But every weather app is built the same way: scary red alerts, complex radar, and zero emotional support. Nobody answers the question anxious people are actually asking.</p>
+  <div class="pgrid">
+    <div class="pcard"><div class="pcard-i">🚨</div><div class="pcard-t">SEVERE WARNING</div><div class="pcard-d">Alarm-driven alerts that spike your cortisol instead of helping you understand the situation.</div></div>
+    <div class="pcard"><div class="pcard-i">📡</div><div class="pcard-t">Raw Radar Data</div><div class="pcard-d">Complex maps designed for meteorologists, not for someone panicking at 2am.</div></div>
+    <div class="pcard"><div class="pcard-i">😰</div><div class="pcard-t">No Reassurance</div><div class="pcard-d">No app tells you "your home can handle this" or "this passes in 35 minutes."</div></div>
+    <div class="pcard"><div class="pcard-i">🧘</div><div class="pcard-t">No Storm Tools</div><div class="pcard-d">Wellness apps have breathing exercises but zero connection to live weather data.</div></div>
   </div>
 </section>
+
+<div class="sep"></div>
 
 <!-- FEATURES -->
+<section class="sec">
+  <div class="tag">The Solution</div>
+  <div class="title">Skye translates weather data into emotional clarity.</div>
+  <p class="sub">Real-time weather intelligence meets psychology-informed communication. Not a weather app. Not a meditation app. Something entirely new.</p>
 
-<section class="features">
-  <div class="section-label">The Solution</div>
-  <div class="section-title">Skye translates weather data into emotional clarity.</div>
-  <div class="section-text">Real-time weather intelligence meets psychology-informed communication. Not a weather app. Not a meditation app. Something entirely new.</div>
-
-  <div class="feature-row">
-    <div class="feature-icon" style="background:rgba(45,200,138,0.15)">🛡</div>
-    <div class="feature-info">
-      <div class="feature-name">Am I Safe? Button</div>
-      <div class="feature-desc">One tap. Real-time location data. A clear, honest answer based on current conditions — not a generic alert.</div>
-    </div>
-  </div>
-
-  <div class="feature-row">
-    <div class="feature-icon" style="background:rgba(106,175,224,0.15)">💬</div>
-    <div class="feature-info">
-      <div class="feature-name">Live Storm Companion</div>
-      <div class="feature-desc">Stays with you through the entire storm. Calm updates, progress countdown, and a voice that says "you're doing well" when you need it most.</div>
-    </div>
-  </div>
-
-  <div class="feature-row">
-    <div class="feature-icon" style="background:rgba(255,209,0,0.15)">⚡</div>
-    <div class="feature-info">
-      <div class="feature-name">Calm Forecast Mode</div>
-      <div class="feature-desc">Plain-language risk levels. "Loud thunder expected. Your home is fine. This passes in 35 minutes." Not SEVERE THUNDERSTORM WARNING in red.</div>
-    </div>
-  </div>
-
-  <div class="feature-row">
-    <div class="feature-icon" style="background:rgba(192,56,106,0.15)">🌬</div>
-    <div class="feature-info">
-      <div class="feature-name">Anxiety Toolkit</div>
-      <div class="feature-desc">Breathing timer, 5-4-3-2-1 grounding, storm facts, and a post-storm journal. Evidence-based tools that actually work during panic.</div>
-    </div>
-  </div>
-
-  <div class="feature-row">
-    <div class="feature-icon" style="background:rgba(106,80,200,0.15)">⚙️</div>
-    <div class="feature-info">
-      <div class="feature-name">Fear Profile</div>
-      <div class="feature-desc">Tell Skye what scares you — tornadoes, lightning, thunder, being alone. Every alert adapts to YOUR triggers, not generic warnings.</div>
-    </div>
-  </div>
+  <div class="frow"><div class="ficon" style="background:rgba(45,200,138,.15)">🛡</div><div><div class="fname">Am I Safe? Button</div><div class="fdesc">One tap. Real-time location data. A clear, honest answer based on current conditions — not a generic alert.</div></div></div>
+  <div class="frow"><div class="ficon" style="background:rgba(106,175,224,.15)">💬</div><div><div class="fname">Live Storm Companion</div><div class="fdesc">Stays with you through the entire storm. Calm updates, progress countdown, and a voice that says "you're doing well" when you need it most.</div></div></div>
+  <div class="frow"><div class="ficon" style="background:rgba(255,209,0,.15)">⚡</div><div><div class="fname">Calm Forecast Mode</div><div class="fdesc">Plain-language risk levels. "Loud thunder expected. Your home is fine. This passes in 35 minutes." Not SEVERE THUNDERSTORM WARNING in red.</div></div></div>
+  <div class="frow"><div class="ficon" style="background:rgba(192,56,106,.15)">🌬</div><div><div class="fname">Anxiety Toolkit</div><div class="fdesc">Breathing timer, 5-4-3-2-1 grounding, storm facts, and a post-storm journal. Evidence-based tools that actually work during panic.</div></div></div>
+  <div class="frow"><div class="ficon" style="background:rgba(106,80,200,.15)">⚙️</div><div><div class="fname">Fear Profile</div><div class="fdesc">Tell Skye what scares you — tornadoes, lightning, thunder, being alone. Every alert adapts to YOUR triggers, not generic warnings.</div></div></div>
 </section>
+
+<div class="sep"></div>
 
 <!-- SOCIAL PROOF -->
-
-<section class="proof">
-  <div class="section-label">What People Are Saying</div>
-  <div class="section-title">We asked. They answered.</div>
-  <div class="quote-card">
-    <div class="quote-text">"It would make it so much easier than having the 'what-if' **** scratching from the inside of your skull."</div>
-    <div class="quote-source">— r/WeatherAnxiety</div>
+<section class="sec" style="text-align:center">
+  <div class="tag">What People Are Saying</div>
+  <div class="title">We asked. They answered.</div>
+  <div class="qcard"><div class="qtxt">"It would make it so much easier than having the 'what-if' **** scratching from the inside of your skull."</div><div class="qsrc">— r/WeatherAnxiety · 9 upvotes</div></div>
+  <div class="qcard"><div class="qtxt">"It would calm my nerves greatly."</div><div class="qsrc">— r/WeatherAnxiety · 4 upvotes</div></div>
+  <div class="stats">
+    <div class="sbox"><div class="snum">19.3M</div><div class="slab">Adults w/ specific phobias</div></div>
+    <div class="sbox"><div class="snum">85%</div><div class="slab">Report storm fear</div></div>
+    <div class="sbox"><div class="snum">0</div><div class="slab">Direct competitors</div></div>
   </div>
-  <div class="quote-card">
-    <div class="quote-text">"It would calm my nerves greatly."</div>
-    <div class="quote-source">— r/WeatherAnxiety</div>
-  </div>
-  <div class="proof-stats">
-    <div class="proof-stat"><div class="proof-num">700+</div><div class="proof-label">Views in 5 hours</div></div>
-    <div class="proof-stat"><div class="proof-num">85%</div><div class="proof-label">Report storm fear</div></div>
-    <div class="proof-stat"><div class="proof-num">0</div><div class="proof-label">Direct competitors</div></div>
-  </div>
+  <div class="ssrc">Sources: NIMH / NCS-R (19.3M) · Ball State / American Meteorological Society survey (85%)</div>
 </section>
 
-<!-- COMPARISON -->
+<div class="sep"></div>
 
-<section class="comparison">
-  <div class="section-label">The Gap</div>
-  <div class="section-title">Nobody is doing what Skye does.</div>
-  <table class="comp-table">
-    <thead>
-      <tr>
-        <th>Feature</th>
-        <th>Weather Apps</th>
-        <th>Wellness Apps</th>
-        <th class="skye-col">Skye</th>
-      </tr>
-    </thead>
+<!-- COMPARISON -->
+<section class="sec">
+  <div class="tag">The Gap</div>
+  <div class="title">Nobody is doing what Skye does.</div>
+  <table class="ctable">
+    <thead><tr><th>Feature</th><th>Weather Apps</th><th>Wellness Apps</th><th class="sk">Skye</th></tr></thead>
     <tbody>
-      <tr>
-        <td>Plain-language safety checks</td>
-        <td><span class="comp-x">✗</span></td>
-        <td><span class="comp-x">✗</span></td>
-        <td><span class="comp-check">✓</span></td>
-      </tr>
-      <tr>
-        <td>Real-time weather data</td>
-        <td><span class="comp-check">✓</span></td>
-        <td><span class="comp-x">✗</span></td>
-        <td><span class="comp-check">✓</span></td>
-      </tr>
-      <tr>
-        <td>Breathing and grounding tools</td>
-        <td><span class="comp-x">✗</span></td>
-        <td><span class="comp-check">✓</span></td>
-        <td><span class="comp-check">✓</span></td>
-      </tr>
-      <tr>
-        <td>Storm-specific reassurance</td>
-        <td><span class="comp-x">✗</span></td>
-        <td><span class="comp-x">✗</span></td>
-        <td><span class="comp-check">✓</span></td>
-      </tr>
-      <tr>
-        <td>Personalized fear profile</td>
-        <td><span class="comp-x">✗</span></td>
-        <td><span class="comp-x">✗</span></td>
-        <td><span class="comp-check">✓</span></td>
-      </tr>
-      <tr>
-        <td>Post-storm recovery</td>
-        <td><span class="comp-x">✗</span></td>
-        <td><span class="comp-x">✗</span></td>
-        <td><span class="comp-check">✓</span></td>
-      </tr>
+      <tr><td>Plain-language safety checks</td><td class="cx">✗</td><td class="cx">✗</td><td class="ck">✓</td></tr>
+      <tr><td>Real-time weather data</td><td class="ck">✓</td><td class="cx">✗</td><td class="ck">✓</td></tr>
+      <tr><td>Breathing and grounding tools</td><td class="cx">✗</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+      <tr><td>Storm-specific reassurance</td><td class="cx">✗</td><td class="cx">✗</td><td class="ck">✓</td></tr>
+      <tr><td>Personalized fear profile</td><td class="cx">✗</td><td class="cx">✗</td><td class="ck">✓</td></tr>
+      <tr><td>Post-storm recovery</td><td class="cx">✗</td><td class="cx">✗</td><td class="ck">✓</td></tr>
     </tbody>
   </table>
 </section>
 
-<!-- WAITLIST -->
+<div class="sep"></div>
 
-<section class="waitlist" id="waitlist">
-  <div class="section-label">Be First</div>
-  <div class="section-title">Join the waitlist.</div>
-  <div class="section-text">Skye is being built right now. Join the waitlist and be the first to know when it launches. Your first 3 storms are on us.</div>
-  <form class="waitlist-form" action="https://formsubmit.co/skye.ctes.app@gmail.com" method="POST">
+<!-- WAITLIST -->
+<section class="sec wlbox" id="waitlist">
+  <div class="tag">Be First</div>
+  <div class="wltag">Your first 3 storms are on us.</div>
+  <div class="title">Join the Waitlist</div>
+  <p class="sub" style="text-align:center;margin-left:auto;margin-right:auto">Skye is being built right now. Be the first to know when it launches.</p>
+  <form class="wlform" action="https://formsubmit.co/skye.ctes.app@gmail.com" method="POST">
     <input type="hidden" name="_subject" value="New Skye Waitlist Signup!">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_next" value="https://skye-ctes-app.github.io/skye-website/#thanks">
-    <input type="text" name="name" class="form-input" placeholder="Name" required>
-    <input type="email" name="email" class="form-input" placeholder="Email" required>
-    <textarea name="fears" class="form-input form-textarea" placeholder="What Scares You Most About Storms?"></textarea>
-    <button type="submit" class="form-submit">I'm In!</button>
-    <div class="form-note">No spam. Ever. Just calm updates about Skye.</div>
+    <input type="text" name="name" class="fi" placeholder="Name" required>
+    <input type="email" name="email" class="fi" placeholder="Email" required>
+    <textarea name="fears" class="fi fta" placeholder="What scares you most about storms?"></textarea>
+    <button type="submit" class="fbtn">I'm In!</button>
+    <div class="fnote">No spam. Ever. Just calm updates about Skye.</div>
   </form>
 </section>
 
-<!-- FOUNDER -->
+<div class="sep"></div>
 
-<section class="founder">
-  <div class="section-label">The Story</div>
-  <div class="section-title">Built by someone who gets it.</div>
-  <div class="founder-card">
-    <div class="founder-text">"Hi, I'm Katelin. I've lived with storm anxiety my whole life. Every weather app I've ever used made it worse — scary alerts, bright red radar, and zero answers to the only question that actually matters: 'Am I safe right now?'</div>
-    <div class="founder-text" style="margin-top:12px">So I built Skye myself. In just a few days on my iPhone, I created the live prototypes you can try right now. It turns real weather data into plain-language calm, with an 'Am I Safe?' button, storm companion messages, and simple tools that actually help in the moment.</div>
-    <div class="founder-text" style="margin-top:12px">I'm still a solo founder and pre-MVP. I'm actively looking for a technical co-founder to help turn this prototype into a real mobile app. If you're a developer, therapist, or someone who just gets it, I'd love to hear from you."</div>
-    <div class="founder-name" style="margin-top:16px">Katelin</div>
-    <div class="founder-loc">Alabama · Tornado Belt</div>
+<!-- FOUNDER -->
+<section class="sec">
+  <div class="tag">The Story</div>
+  <div class="title">Built by someone who lives it.</div>
+  <div class="fcard">
+    <div class="fcard-text">"I'm Katelin, a 21-year-old from Alabama's tornado belt. I've lived with storm anxiety my whole life. Every weather app I've ever used made it worse — scary alerts, bright red radar, and zero answers to the only question that actually matters: 'Am I safe right now?'"</div>
+    <div class="fcard-text">"So I built Skye. On my iPhone. In a few days. No coding background. Just a problem I was tired of living with and no one solving. The live demo uses real National Weather Service data. Chief Meteorologist James Spann reviewed it and said he loved the concept."</div>
+    <div class="fcard-text">"I'm a solo founder looking for a technical co-founder to help turn this into a real mobile app. If you're a developer, therapist, meteorologist, or someone who just gets it — I'd love to hear from you."</div>
+    <div class="fcard-name">Katelin Selvage</div>
+    <div class="fcard-loc">Columbia, Alabama · Tornado Belt</div>
   </div>
 </section>
 
-<!-- CONNECT -->
+<div class="sep"></div>
 
-<section class="waitlist" id="connect">
-  <div class="section-label">Get Involved</div>
-  <div class="section-title">Want to help build Skye?</div>
-  <div class="section-text">Developer, therapist, meteorologist, or someone who just gets it? Reach out. Skye is looking for people who care about this problem as much as I do.</div>
-  <form class="waitlist-form" action="https://formsubmit.co/skye.ctes.app@gmail.com" method="POST">
+<!-- CONNECT -->
+<section class="sec wlbox" id="connect">
+  <div class="tag">Get Involved</div>
+  <div class="title">Want to help build Skye?</div>
+  <p class="sub" style="text-align:center;margin-left:auto;margin-right:auto">Developer, therapist, meteorologist, or someone who just gets it? Reach out.</p>
+  <form class="wlform" action="https://formsubmit.co/skye.ctes.app@gmail.com" method="POST">
     <input type="hidden" name="_subject" value="Skye — Someone Wants to Connect!">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_next" value="https://skye-ctes-app.github.io/skye-website/#thanks">
-    <input type="text" name="name" class="form-input" placeholder="Name" required>
-    <input type="email" name="email" class="form-input" placeholder="Email" required>
-    <textarea name="message" class="form-input form-textarea" placeholder="Developer, therapist, or someone who just gets it? Let me know!"></textarea>
-    <button type="submit" class="form-submit" style="background:#6AAFE0">Let's Talk</button>
-    <div class="form-note">I read every message personally.</div>
+    <input type="text" name="name" class="fi" placeholder="Name" required>
+    <input type="email" name="email" class="fi" placeholder="Email" required>
+    <textarea name="message" class="fi fta" placeholder="Developer, therapist, or someone who just gets it? Let me know!"></textarea>
+    <button type="submit" class="fbtn" style="background:#6AAFE0">Let's Talk</button>
+    <div class="fnote">I read every message personally.</div>
   </form>
 </section>
 
-<!-- SOCIALS -->
+<div class="sep"></div>
 
-<section class="socials">
-  <div class="section-label">Follow the Journey</div>
-  <div class="section-title">Watch Skye get built.</div>
-  <div class="social-grid">
-    <a href="https://instagram.com/skye.ctes.app" target="_blank" class="social-link">@skye.ctes.app <span>📸</span></a>
-    <a href="https://tiktok.com/@skye.ctes.app" target="_blank" class="social-link">@skye.ctes.app <span>🎵</span></a>
-    <a href="https://x.com/skye_ctes_app" target="_blank" class="social-link">@skye_ctes_app <span>𝕏</span></a>
-    <a href="https://facebook.com/skyectesapp" target="_blank" class="social-link">Skye: Calm Through Every Storm <span>📘</span></a>
+<!-- SOCIALS -->
+<section class="sec" style="text-align:center">
+  <div class="tag">Follow the Journey</div>
+  <div class="title">Watch Skye get built.</div>
+  <div class="sgrid">
+    <a href="https://instagram.com/skye.ctes.app" target="_blank" class="slink">@skye.ctes.app <span>📸</span></a>
+    <a href="https://tiktok.com/@skye.ctes.app" target="_blank" class="slink">@skye.ctes.app <span>🎵</span></a>
+    <a href="https://x.com/skye_ctes_app" target="_blank" class="slink">@skye_ctes_app <span>𝕏</span></a>
+    <a href="https://facebook.com/skyectesapp" target="_blank" class="slink">Skye: Calm Through Every Storm <span>📘</span></a>
+    <a href="https://buymeacoffee.com/skye.ctes" target="_blank" class="slink cof">Support Skye <span>☕</span></a>
   </div>
 </section>
 
 <!-- FOOTER -->
-
-<div class="footer">
+<div class="foot">
   <p>Skye — Calm Through Every Storm</p>
   <p>Emotional Weather Technology · Alabama · 2026</p>
   <p style="margin-top:8px"><a href="https://skye-ctes-app.github.io/skye-app-demo/">Try the Demo</a> · <a href="#waitlist">Join Waitlist</a></p>
   <p style="margin-top:12px">Skye does not guarantee safety and does not override official NWS warnings.<br>Always follow local emergency guidance.</p>
 </div>
 
-<!-- FLOATING CTA -->
-
-<a href="#waitlist" class="float-cta" id="floatCta">Join the Waitlist →</a>
+<!-- FLOAT CTA -->
+<a href="#waitlist" class="fcta" id="fc">Join the Waitlist →</a>
 
 <script>
-// Show floating CTA after scrolling past hero
-const observer = new IntersectionObserver((entries) => {
-  const cta = document.getElementById('floatCta');
-  if (!entries[0].isIntersecting) {
-    cta.classList.add('show');
-  } else {
-    cta.classList.remove('show');
-  }
-}, { threshold: 0 });
-observer.observe(document.querySelector('.hero'));
+// Stars
+const c=document.getElementById('stars');
+for(let i=0;i<55;i++){const s=document.createElement('div');s.className='star';const z=Math.random()*2+.7;s.style.cssText='width:'+z+'px;height:'+z+'px;top:'+Math.random()*100+'%;left:'+Math.random()*100+'%;animation-delay:'+Math.random()*4+'s;animation-duration:'+(2+Math.random()*3)+'s';c.appendChild(s)}
 
-// Hide float CTA when near waitlist section
-const waitlistObs = new IntersectionObserver((entries) => {
-  const cta = document.getElementById('floatCta');
-  if (entries[0].isIntersecting) {
-    cta.classList.remove('show');
-  }
-}, { threshold: 0.3 });
-waitlistObs.observe(document.getElementById('waitlist'));
+// Float CTA
+const fc=document.getElementById('fc');
+const ho=new IntersectionObserver(e=>{e[0].isIntersecting?fc.classList.remove('show'):fc.classList.add('show')},{threshold:0});
+ho.observe(document.querySelector('.hero'));
+const wo=new IntersectionObserver(e=>{if(e[0].isIntersecting)fc.classList.remove('show')},{threshold:.3});
+wo.observe(document.getElementById('waitlist'));
 </script>
-
 </body>
 </html>

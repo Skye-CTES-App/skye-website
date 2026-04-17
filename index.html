@@ -58,10 +58,18 @@ body{background:linear-gradient(180deg,#0a1628 0%,#112240 30%,#0d1a2e 60%,#0B152
 
 /* Endorsement */
 .endo{max-width:720px;margin:-30px auto 0;padding:0 24px;position:relative;z-index:2}
-.endo-card{text-align:center;padding:26px 20px;background:rgba(45,200,138,.06);border:1px solid rgba(45,200,138,.18);border-radius:18px}
+.endo-grid{display:flex;flex-direction:column;gap:12px}
+.endo-card{text-align:center;padding:26px 20px;border-radius:18px}
+.endo-card.met{background:rgba(45,200,138,.06);border:1px solid rgba(45,200,138,.18)}
+.endo-card.clin{background:rgba(106,175,224,.06);border:1px solid rgba(106,175,224,.18)}
 .endo-q{font-family:‘DM Serif Display’,serif;font-size:21px;color:#fff;font-style:italic;margin-bottom:8px}
-.endo-who{font-size:14px;color:#2DC88A;font-weight:600}
+.endo-who{font-size:14px;font-weight:600}
+.endo-card.met .endo-who{color:#2DC88A}
+.endo-card.clin .endo-who{color:#6AAFE0}
 .endo-sub{font-size:11px;color:#3A5570;margin-top:3px}
+.press-line{text-align:center;margin-top:16px}
+.press-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#6A8BA8;text-decoration:none;padding:8px 16px;border:1px solid rgba(255,255,255,.06);border-radius:50px;transition:all .2s;background:rgba(255,255,255,.02)}
+.press-link:hover{border-color:rgba(255,255,255,.15);color:#C8DCF0}
 
 /* Sections */
 .sec{padding:70px 24px;max-width:720px;margin:0 auto}
@@ -173,13 +181,23 @@ body{background:linear-gradient(180deg,#0a1628 0%,#112240 30%,#0d1a2e 60%,#0B152
   <div class="scroll-arr">↓ Scroll</div>
 </div>
 
-<!-- FEEDBACK -->
+<!-- ENDORSEMENTS -->
 
 <div class="endo">
-  <div class="endo-card">
-    <div class="endo-q">"Love the concept."</div>
-    <div class="endo-who">— Local Alabama meteorologist</div>
-    <div class="endo-sub">Reviewed an early demo and shared helpful safety feedback</div>
+  <div class="endo-grid">
+    <div class="endo-card met">
+      <div class="endo-q">"Love the concept."</div>
+      <div class="endo-who">— Local Alabama meteorologist</div>
+      <div class="endo-sub">Reviewed an early demo and shared helpful safety feedback</div>
+    </div>
+    <div class="endo-card clin">
+      <div class="endo-q">"I think it's very useful."</div>
+      <div class="endo-who">— Dr. Kevin Chapman, KY-CARDS</div>
+      <div class="endo-sub">Clinical anxiety specialist — consulted on Skye's clinical alignment</div>
+    </div>
+  </div>
+  <div class="press-line">
+    <a href="https://wiregrassdailynews.com/featured-news/2026-04-14/wiregrass-developer-builds-app-to-help-storm-anxiety/" target="_blank" class="press-link">📰 As featured in Wiregrass Daily News</a>
   </div>
 </div>
 
